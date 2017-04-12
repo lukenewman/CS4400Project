@@ -38,4 +38,7 @@ public class ApplicationWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null); 
 	}
+	
+	
+	// Note: For connecting to the SQL server -> http://stackoverflow.com/questions/2839321/connect-java-to-a-mysql-database
 }
