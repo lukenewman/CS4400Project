@@ -2,7 +2,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-public class ExampleApplicationWindow {
+public class ApplicationWindow {
 
 	private JFrame frame;
 
@@ -13,7 +13,7 @@ public class ExampleApplicationWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ExampleApplicationWindow window = new ExampleApplicationWindow();
+					ApplicationWindow window = new ApplicationWindow();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -25,7 +25,7 @@ public class ExampleApplicationWindow {
 	/**
 	 * Create the application.
 	 */
-	public ExampleApplicationWindow() {
+	public ApplicationWindow() {
 		initialize();
 	}
 
@@ -33,9 +33,12 @@ public class ExampleApplicationWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new LoginFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null); 
 	}
-
+	
+	
+	// Note: For connecting to the SQL server -> http://stackoverflow.com/questions/2839321/connect-java-to-a-mysql-database
 }
