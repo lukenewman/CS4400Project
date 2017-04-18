@@ -1,6 +1,3 @@
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -9,31 +6,16 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.JPasswordField;
 
 public class RegistrationFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField usernameTextField;
 	private JTextField emailAddressTextField;
-	private JTextField passwordTextField;
-	private JTextField confirmPasswordTextField;
 	private JTextField titleTextField;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RegistrationFrame frame = new RegistrationFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JPasswordField passwordField;
+	private JPasswordField comfirmPasswordField;
 
 	/**
 	 * Create the frame.
@@ -73,19 +55,9 @@ public class RegistrationFrame extends JFrame {
 		lblPassword.setBounds(110, 128, 170, 16);
 		contentPane.add(lblPassword);
 		
-		passwordTextField = new JTextField();
-		passwordTextField.setColumns(10);
-		passwordTextField.setBounds(292, 123, 130, 26);
-		contentPane.add(passwordTextField);
-		
 		JLabel lblConfirmPassword = new JLabel("Confirm Password");
 		lblConfirmPassword.setBounds(110, 161, 170, 16);
 		contentPane.add(lblConfirmPassword);
-		
-		confirmPasswordTextField = new JTextField();
-		confirmPasswordTextField.setColumns(10);
-		confirmPasswordTextField.setBounds(292, 156, 130, 26);
-		contentPane.add(confirmPasswordTextField);
 		
 		JLabel lblUserType = new JLabel("User Type");
 		lblUserType.setBounds(110, 189, 94, 16);
@@ -127,5 +99,13 @@ public class RegistrationFrame extends JFrame {
 		JButton createButton = new JButton("Create");
 		createButton.setBounds(200, 340, 117, 29);
 		contentPane.add(createButton);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(292, 123, 130, 26);
+		contentPane.add(passwordField);
+		
+		comfirmPasswordField = new JPasswordField();
+		comfirmPasswordField.setBounds(292, 156, 130, 26);
+		contentPane.add(comfirmPasswordField);
 	}
 }

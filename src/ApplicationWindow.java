@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 public class ApplicationWindow {
 
-	private JFrame frame;
+	private LoginFrame frame;
 
 	/**
 	 * Launch the application.

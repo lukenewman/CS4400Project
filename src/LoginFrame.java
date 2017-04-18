@@ -1,7 +1,6 @@
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -11,24 +10,8 @@ import javax.swing.JButton;
 public class LoginFrame extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginFrame frame = new LoginFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JTextField usernameTextField;
+	private JPasswordField passwordField;
 
 	/**
 	 * Create the frame.
@@ -54,15 +37,15 @@ public class LoginFrame extends JFrame {
 		lblNewLabel_1.setBounds(65, 148, 73, 16);
 		contentPane.add(lblNewLabel_1);
 		
-		textField = new JTextField();
-		textField.setBounds(195, 97, 130, 26);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		usernameTextField = new JTextField();
+		usernameTextField.setBounds(195, 97, 130, 26);
+		contentPane.add(usernameTextField);
+		usernameTextField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(195, 143, 130, 26);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		passwordField = new JPasswordField();
+		passwordField.setBounds(195, 143, 130, 26);
+		contentPane.add(passwordField);
+		passwordField.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.setBounds(85, 198, 117, 29);
