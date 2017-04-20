@@ -11,6 +11,8 @@ public class Application {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				createAndShowGUI();
+				DatabaseConnection connection = new DatabaseConnection();
+				connection.getSomething();
 			}
 		});
 	}
