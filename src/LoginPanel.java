@@ -61,7 +61,8 @@ public class LoginPanel extends JPanel {
 		
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				boolean loggedIn = DatabaseConnection.sharedConnection().login(usernameTextField.getText(), new String(passwordField.getPassword()));
+				// move to next screen
 			}
 		});
 	}
