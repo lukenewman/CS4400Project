@@ -84,9 +84,9 @@ public class DatabaseConnection {
 		}
 	}
 	
-	public String[] getUserTypes() {
-		ResultSet rs = this.executeQuery("SELECT DISTINCT User_Type FROM User WHERE User_Type != ‘Admin’");
-	}
+//	public String[] getUserTypes() {
+//		ResultSet rs = this.executeQuery("SELECT DISTINCT User_Type FROM User WHERE User_Type != ‘Admin’");
+//	}
 
 	public void fig_2() {
 		this.executeQuery("SELECT * from City_State");
