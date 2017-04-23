@@ -11,6 +11,7 @@ public class Application {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				createAndShowGUI();
+				DatabaseConnection.sharedConnection().executeQuery("SQL Query Goes Here...");
 			}
 		});
 	}

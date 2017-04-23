@@ -135,7 +135,7 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 	}
 
 	private void registerUser() {
-		// 1. Check for empty fields.
+		// Check for empty fields.
 		if (usernameTextField.getText().equals("") || 
 			emailAddressTextField.getText().equals("") || 
 			new String(passwordField.getPassword()).equals("") || 
@@ -144,9 +144,7 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 			return;
 		}
 
-		// TODO - 2. Check for unique email and username.
-
-		// 3. Check if passwords match.
+		// Check if passwords match.
 		if (!(new String(passwordField.getPassword()).equals(new String(confirmPasswordField.getPassword())))) {
 			passwordField.setText("");
 			confirmPasswordField.setText("");
@@ -154,7 +152,7 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 			return;
 		}
 
-		// 4. For City Officials, check the remaining fields.
+		// For City Officials, check the remaining fields.
 		String selectedUserType = (String)userTypeComboBox.getSelectedItem();
 		if (selectedUserType.equals("City Official")) {
 			if (titleTextField.getText().equals("")) {
