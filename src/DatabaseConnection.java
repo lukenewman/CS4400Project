@@ -90,4 +90,37 @@ public class DatabaseConnection {
 		    }
 		}
 	}
+	public void fig_1() {
+		this.executeQuery("SELECT Username,Password FROM User");		
+	}
+	public void fig_2() {
+		this.executeQuery("SELECT DISTINCT User_Type FROM User WHERE User_Type != ‘Admin’");
+		this.executeQuery("SELECT * from City_State");
+		this.executeQuery("INSERT INTO User VALUES(Username, Email_Address, Password, UserType)");	
+		this.executeQuery("INSERT INTO City_Official VALUES(Username, Title, Approved, City, State);");
+	}
+	public void fig_3() {
+		this.executeQuery("SELECT Name FROM POI");
+		this.executeQuery("SELECT * FROM DataType");
+		this.executeQuery("INSERT INTO DataPoint VALUES(Name, DateRecorded, DataValue, DataType, Accepted)");	
+	}
+	public void fig_4() {
+		this.executeQuery("SELECT * FROM City_State");
+		this.executeQuery("INSERT INTO POI VALUES(Name, Flag, DateFlagged, ZipCode, City, State)");
+	}
+	public void fig_6() {
+		this.executeQuery("SELECT * FROM DataPoint WHERE Accepted IS NULL");
+		this.executeQuery("UPDATE DataPoint SET Accepted = ? WHERE Name = ?");
+	}
+	public void fig_7(String accepted, String uname) {
+		String first = "UPDATE City_Official SET Accepted = " + accepted + " WHERE Username = " + uname; 
+		this.executeQuery("SELECT * FROM City_Official WHERE Accepted IS NULL");
+		this.executeQuery(first);
+	}
+	public void fig_9(String name, String city, String state, String zip, String flagged, String low , String high) {
+		String first = "SELECT * FROM POI WHERE Name = " + name + " AND City = " + city +" AND State = " + state + " AND ZipCode = " + zip + " AND Flagged = " + flagged + " AND DateFlagged BETWEEN " + low +" AND " + high ;
+		this.executeQuery("SELECT Name FROM POI");
+		this.executeQuery("SELECT * FROM City_State");
+		this.executeQuery(first);
+	}
 }
