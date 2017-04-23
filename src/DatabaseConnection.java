@@ -1,21 +1,23 @@
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseConnection {
 	Connection connection;
 	private static DatabaseConnection instance = null;
-	
+
 	private DatabaseConnection() {
 		connection = null;
 		setupConnection();
 	}
-	
-	public static DatabaseConnection sharedConnection()  {
+
+	public static DatabaseConnection sharedConnection() {
 		if (instance == null) {
 			instance = new DatabaseConnection();
 		}
 		return instance;
 	}
-	
+
 	public void setupConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -26,7 +28,7 @@ public class DatabaseConnection {
 			System.err.println("Exception: " + e.getMessage());
 		}
 	}
-	
+
 	public void closeConnection() {
 		try {
 			if (connection != null) {
@@ -35,59 +37,38 @@ public class DatabaseConnection {
 		} catch (SQLException e) {
 		}
 	}
-	
+
 	public ResultSet executeQuery(String sqlQuery) {
 		Statement stmt = null;
-		ResultSet rs = null;
 
 		try {
-		    stmt = connection.createStatement();
-		    rs = stmt.executeQuery(sqlQuery);
-
-		    // or alternatively, if you don't know ahead of time that
-		    // the query will be a SELECT...
-
-//		    if (stmt.execute("SELECT foo FROM bar")) {
-//		        rs = stmt.getResultSet();
-//		    }
-
-		    // Now do something with the ResultSet ....
-		    ResultSetMetaData rsmd = rs.getMetaData();
-		    int columnsNumber = rsmd.getColumnCount();
-		    while (rs.next()) {
-		        for (int i = 1; i <= columnsNumber; i++) {
-		            if (i > 1) System.out.print(",  ");
-		            String columnValue = rs.getString(i);
-		            System.out.print(columnValue + " " + rsmd.getColumnName(i));
-		        }
-		        System.out.println("");
-		    }
-		    
-		    return rs;
+			stmt = connection.createStatement();
+			return stmt.executeQuery(sqlQuery);
+		} catch (SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+			System.out.println("SQLState: " + ex.getSQLState());
+			System.out.println("VendorError: " + ex.getErrorCode());
+			return null;
 		}
-		catch (SQLException ex){
-		    // handle any errors
-		    System.out.println("SQLException: " + ex.getMessage());
-		    System.out.println("SQLState: " + ex.getSQLState());
-		    System.out.println("VendorError: " + ex.getErrorCode());
-		    return null;
+	}
+
+	public List<User> getUsers() {
+		ResultSet rs = this.executeQuery("SELECT * FROM User");
+		
+		List<User> users = new ArrayList<User>();
+		try {
+			while (rs.next()) {
+				User newUser = new User();
+				newUser.setUsername(rs.getString("Username"));
+				newUser.setEmailAddress(rs.getString("Email_Address"));
+				newUser.setPassword(rs.getString("Password"));
+				newUser.setUserType(rs.getString("User_Type"));
+				users.add(newUser);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		finally {
-		    if (rs != null) {
-		        try {
-		            rs.close();
-		        } catch (SQLException sqlEx) { } // ignore
-
-		        rs = null;
-		    }
-
-		    if (stmt != null) {
-		        try {
-		            stmt.close();
-		        } catch (SQLException sqlEx) { } // ignore
-
-		        stmt = null;
-		    }
-		}
+		
+		return users;
 	}
 }
