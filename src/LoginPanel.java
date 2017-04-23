@@ -58,5 +58,11 @@ public class LoginPanel extends JPanel {
 				app.showRegistrationFrame();
 		  	}
 		});
+		
+		loginButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 	}
 }

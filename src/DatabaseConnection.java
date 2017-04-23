@@ -2,17 +2,24 @@ import java.sql.*;
 
 public class DatabaseConnection {
 	Connection connection;
+	private static DatabaseConnection instance = null;
 	
-	public DatabaseConnection() {
+	private DatabaseConnection() {
 		connection = null;
 		setupConnection();
+	}
+	
+	public static DatabaseConnection sharedConnection()  {
+		if (instance == null) {
+			instance = new DatabaseConnection();
+		}
+		return instance;
 	}
 	
 	public void setupConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			connection = DriverManager.getConnection("jdbc:mysql://academic-mysql.cc.gatech.edu/cs4400_58",
-					"cs4400_58", "cB02pSbP");
+			connection = DriverManager.getConnection("jdbc:mysql://academic-mysql.cc.gatech.edu/cs4400_58", "cs4400_58", "cB02pSbP");
 			if (!connection.isClosed())
 				System.out.println("Successfully connected to " + "MySQL server using TCP/IP...");
 		} catch (Exception e) {
@@ -29,13 +36,13 @@ public class DatabaseConnection {
 		}
 	}
 	
-	public void getSomething() {
+	public ResultSet executeQuery(String sqlQuery) {
 		Statement stmt = null;
 		ResultSet rs = null;
 
 		try {
 		    stmt = connection.createStatement();
-		    rs = stmt.executeQuery("SELECT Username FROM User");
+		    rs = stmt.executeQuery(sqlQuery);
 
 		    // or alternatively, if you don't know ahead of time that
 		    // the query will be a SELECT...
@@ -55,19 +62,17 @@ public class DatabaseConnection {
 		        }
 		        System.out.println("");
 		    }
+		    
+		    return rs;
 		}
 		catch (SQLException ex){
 		    // handle any errors
 		    System.out.println("SQLException: " + ex.getMessage());
 		    System.out.println("SQLState: " + ex.getSQLState());
 		    System.out.println("VendorError: " + ex.getErrorCode());
+		    return null;
 		}
 		finally {
-		    // it is a good idea to release
-		    // resources in a finally{} block
-		    // in reverse-order of their creation
-		    // if they are no-longer needed
-
 		    if (rs != null) {
 		        try {
 		            rs.close();
