@@ -207,7 +207,18 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 			}
 		}
 		
-		// TODO - 5. Register with the backend.
+		// Register with the database.
+		User newUser = new User();
+		newUser.setUsername(usernameTextField.getText());
+		newUser.setEmailAddress(emailAddressTextField.getText());
+		newUser.setPassword(new String(passwordField.getPassword()));
+		newUser.setUserType((String)userTypeComboBox.getSelectedItem());
+		boolean success = DatabaseConnection.sharedConnection().registerUser(newUser);
+		if (success) {
+			// go to new data point
+		} else {
+			
+		}
 	}
 	
 	private void updateUIForSelectedUserType(String userType) {

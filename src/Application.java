@@ -12,12 +12,17 @@ public class Application {
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				createAndShowGUI();
+				try {
+					createAndShowGUI();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 	}
 	
-	private static void createAndShowGUI() {
+	private static void createAndShowGUI() throws SQLException {
         JFrame frame = new JFrame();
         frame.setBounds(200, 200, 550, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

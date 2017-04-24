@@ -6,10 +6,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 
 public class CityOfficialFunctionality extends JPanel {
-
-	/**
-	 * Create the panel.
-	 */
+	
 	public CityOfficialFunctionality() {
 		setLayout(null);
 		
@@ -31,7 +28,5 @@ public class CityOfficialFunctionality extends JPanel {
 		JButton btnLogOut = new JButton("Log Out");
 		btnLogOut.setBounds(289, 239, 117, 29);
 		add(btnLogOut);
-
 	}
-
 }

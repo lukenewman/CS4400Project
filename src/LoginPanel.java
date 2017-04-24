@@ -1,6 +1,7 @@
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -62,6 +63,7 @@ public class LoginPanel extends JPanel {
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean loggedIn = DatabaseConnection.sharedConnection().login(usernameTextField.getText(), new String(passwordField.getPassword()));
+				System.out.println(loggedIn);
 				// move to next screen
 			}
 		});
