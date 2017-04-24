@@ -6,8 +6,10 @@ import javax.swing.*;
 public class Application {
 
 	JPanel cards;
-    final static String LOGINPANEL = "Login Panel";
-    final static String REGISTRATIONPANEL = "Registration Panel";
+    final static String LOGIN_PANEL = "Login Panel";
+    final static String REGISTRATION_PANEL = "Registration Panel";
+    final static String CITY_SCIENTIST_OPTIONS_PANEL = "City Scientist Options";
+    final static String CITY_OFFICIAL_OPTIONS_PANEL = "City Official Options";
 	
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -15,7 +17,6 @@ public class Application {
 				try {
 					createAndShowGUI();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -35,17 +36,31 @@ public class Application {
 	
 	public void addComponentToPane(Container pane) throws SQLException {
         JPanel loginPanel = new LoginPanel(this);
-        JPanel registrationPanel = new RegistrationPanel();
+        JPanel registrationPanel = new RegistrationPanel(this);
+        JPanel cityScientistOptionsPanel = new CityScientistOptionsPanel();
+        JPanel cityOfficialOptionsPanel = new CityOfficialOptionsPanel();
         
         cards = new JPanel(new CardLayout());
-        cards.add(loginPanel, LOGINPANEL);
-        cards.add(registrationPanel, REGISTRATIONPANEL);
+        cards.add(loginPanel, LOGIN_PANEL);
+        cards.add(registrationPanel, REGISTRATION_PANEL);
+        cards.add(cityScientistOptionsPanel, CITY_SCIENTIST_OPTIONS_PANEL);
+        cards.add(cityOfficialOptionsPanel, CITY_OFFICIAL_OPTIONS_PANEL);
          
         pane.add(cards, null);
     }
 	
 	public void showRegistrationFrame() {
 		CardLayout cl = (CardLayout)(cards.getLayout());
-        cl.show(cards, REGISTRATIONPANEL);
+        cl.show(cards, REGISTRATION_PANEL);
+	}
+	
+	public void showCityScientistOptions() {
+		CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, CITY_SCIENTIST_OPTIONS_PANEL);
+	}
+	
+	public void showCityOfficialOptions() {
+		CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, CITY_OFFICIAL_OPTIONS_PANEL);
 	}
 }

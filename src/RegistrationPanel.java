@@ -8,6 +8,8 @@ import java.sql.*;
 @SuppressWarnings("serial")
 public class RegistrationPanel extends JPanel implements ActionListener {
 
+	Application app;
+	
 	private JTextField usernameTextField;
 	private JTextField emailAddressTextField;
 	private JTextField titleTextField;
@@ -18,7 +20,9 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 	private JComboBox<String> cityComboBox;
 	private JComboBox<String> stateComboBox;
 
-	public RegistrationPanel() throws SQLException {
+	public RegistrationPanel(Application app) throws SQLException {
+		this.app = app;
+		
 		setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("New User Registration");
@@ -137,7 +141,7 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 		confirmPasswordField.setBounds(272, 149, 159, 26);
 		add(confirmPasswordField);
 		
-		updateUIForSelectedUserType("City Scientist");
+		updateUIForSelectedUserType("City_Scientist");
 	}
 
 	@Override
@@ -169,7 +173,7 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 
 		// For City Officials, check the remaining fields.
 		String selectedUserType = (String)userTypeComboBox.getSelectedItem();
-		if (selectedUserType.equals("City Official")) {
+		if (selectedUserType.equals("City_Official")) {
 			if (titleTextField.getText().equals("")) {
 				JOptionPane.showMessageDialog(this, "Please enter a title.", "Missing Field", JOptionPane.WARNING_MESSAGE);
 				return;
@@ -184,14 +188,18 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 		newUser.setUserType((String)userTypeComboBox.getSelectedItem());
 		boolean success = DatabaseConnection.sharedConnection().registerUser(newUser);
 		if (success) {
-			// go to new data point
+			if (newUser.getUserType().equals("City_Scientist")) {
+				app.showCityScientistOptions();
+			} else {
+				app.showCityOfficialOptions();
+			}
 		} else {
 			
 		}
 	}
 	
 	private void updateUIForSelectedUserType(String userType) {
-		boolean enabled = userType.equals("City Official");
+		boolean enabled = userType.equals("City_Official");
 		cityComboBox.setEnabled(enabled);
 		stateComboBox.setEnabled(enabled);
 		titleTextField.setEnabled(enabled);

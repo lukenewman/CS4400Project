@@ -5,9 +5,9 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JButton;
 
-public class CityOfficialFunctionality extends JPanel {
+public class CityOfficialOptionsPanel extends JPanel {
 	
-	public CityOfficialFunctionality() {
+	public CityOfficialOptionsPanel() {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Choose Functionality");
