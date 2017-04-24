@@ -94,7 +94,7 @@ public class AddDataPoint extends JPanel {
 		lblDataType.setBounds(123, 213, 61, 16);
 		add(lblDataType);
 		
-		ResultSet rs2 = DatabaseConnection.sharedConnection().executeQuery("SELECT DISTINCT City FROM City_State");
+		ResultSet rs2 = DatabaseConnection.sharedConnection().executeQuery("SELECT * FROM Data_Type");
 		int rowCount2 = 0;
 		List tmp2 = new List();
 		while(rs2.next()){
