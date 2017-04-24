@@ -54,7 +54,7 @@ public class AddLocationPanel extends JPanel {
 		for (int i = 0; i < rowCount; i++) {
 			options[i] = tmp.getItem(i);
 		}
-		JComboBox comboBox = new JComboBox();
+		JComboBox comboBox = new JComboBox(options);
 		comboBox.setBounds(147, 97, 119, 27);
 		add(comboBox);
 		
@@ -62,7 +62,7 @@ public class AddLocationPanel extends JPanel {
 		lblState.setBounds(104, 142, 31, 16);
 		add(lblState);
 		
-		ResultSet rs2 = DatabaseConnection.sharedConnection().executeQuery("SELECT DISTINCT City FROM City_State");
+		ResultSet rs2 = DatabaseConnection.sharedConnection().executeQuery("SELECT DISTINCT State FROM City_State");
 		int rowCount2 = 0;
 		List tmp2 = new List();
 		while(rs2.next()){
