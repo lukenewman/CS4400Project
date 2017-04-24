@@ -52,6 +52,21 @@ public class DatabaseConnection {
 			return null;
 		}
 	}
+	
+	public boolean executeInsert(String sqlStatement) {
+		Statement stmt = null;
+
+		try {
+			stmt = connection.createStatement();
+			stmt.execute(sqlStatement);
+			return true;
+		} catch (SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+			System.out.println("SQLState: " + ex.getSQLState());
+			System.out.println("VendorError: " + ex.getErrorCode());
+			return false;
+		}
+	}
 
 	public List<User> getUsers() {
 		ResultSet rs = this.executeQuery("SELECT * FROM User");
@@ -74,8 +89,9 @@ public class DatabaseConnection {
 	}
 
 	public boolean login(String username, String password) {
-		ResultSet rs = this.executeQuery("SELECT Username,Password FROM User WHERE Username = '" + username + "' AND Password = '" + password + "'");
-		
+		ResultSet rs = this.executeQuery("SELECT Username,Password FROM User WHERE Username = '" + username
+				+ "' AND Password = '" + password + "'");
+
 		try {
 			return rs.next();
 		} catch (SQLException e) {
@@ -83,15 +99,27 @@ public class DatabaseConnection {
 			return false;
 		}
 	}
-	
-	public String[] getUserTypes() {
-		ResultSet rs = this.executeQuery("SELECT DISTINCT User_Type FROM User WHERE User_Type != ‘Admin’");
+
+	public List<String> getUserTypes() {
+		ResultSet rs = this.executeQuery("SELECT DISTINCT User_Type FROM User WHERE User_Type != 'Admin'");
+		printResultSet(rs);
+
+		List<String> userTypes = new ArrayList<String>();
+		try {
+			while (rs.next()) {
+				userTypes.add(new String(rs.getString("User_Type")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("user types: " + userTypes);
+		return userTypes;
 	}
 
-	public void fig_2() {
-		this.executeQuery("SELECT * from City_State");
-		this.executeQuery("INSERT INTO User VALUES(Username, Email_Address, Password, UserType)");
-		this.executeQuery("INSERT INTO City_Official VALUES(Username, Title, Approved, City, State);");
+	public boolean registerUser(User newUser) {
+		return this.executeInsert("INSERT INTO User Values('" + newUser.getUsername() + "', '"
+				+ newUser.getEmailAddress() + "', '" + newUser.getPassword() + "', '" + newUser.getUserType() + "')");
 	}
 
 	public void fig_3() {
@@ -123,5 +151,23 @@ public class DatabaseConnection {
 		this.executeQuery("SELECT Name FROM POI");
 		this.executeQuery("SELECT * FROM City_State");
 		this.executeQuery(first);
+	}
+
+	public void printResultSet(ResultSet rs) {
+		try {
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnsNumber = rsmd.getColumnCount();
+			while (rs.next()) {
+				for (int i = 1; i <= columnsNumber; i++) {
+					if (i > 1)
+						System.out.print(",  ");
+					String columnValue = rs.getString(i);
+					System.out.print(columnValue + " " + rsmd.getColumnName(i));
+				}
+				System.out.println("");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

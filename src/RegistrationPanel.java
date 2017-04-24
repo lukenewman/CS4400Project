@@ -65,7 +65,7 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 		userTypeComboBox = new JComboBox<String>();
 		userTypeComboBox.setFont(new Font("Lato", Font.PLAIN, 13));
 		userTypeComboBox.setBounds(272, 178, 159, 27);
-		userTypeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] { "City Scientist", "City Official" }));
+		userTypeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] { "City_Scientist", "City_Official" }));
 		userTypeComboBox.addActionListener(this);
 		add(userTypeComboBox);
 
@@ -161,7 +161,18 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 			}
 		}
 		
-		// TODO - 5. Register with the backend.
+		// Register with the database.
+		User newUser = new User();
+		newUser.setUsername(usernameTextField.getText());
+		newUser.setEmailAddress(emailAddressTextField.getText());
+		newUser.setPassword(new String(passwordField.getPassword()));
+		newUser.setUserType((String)userTypeComboBox.getSelectedItem());
+		boolean success = DatabaseConnection.sharedConnection().registerUser(newUser);
+		if (success) {
+			// go to new data point
+		} else {
+			
+		}
 	}
 	
 	private void updateUIForSelectedUserType(String userType) {
