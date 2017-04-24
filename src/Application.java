@@ -30,7 +30,12 @@ public class Application {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Application app = new Application();
-        app.addComponentToPane(frame.getContentPane());
+        try {
+			app.addComponentToPane(frame.getContentPane());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         frame.setVisible(true);
 	}
