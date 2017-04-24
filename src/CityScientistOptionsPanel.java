@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -8,7 +10,11 @@ import javax.swing.SwingConstants;
 
 public class CityScientistOptionsPanel extends JPanel {
 
-	public CityScientistOptionsPanel() {
+	Application app;
+	
+	public CityScientistOptionsPanel(Application app) {
+		this.app = app;
+		
 		setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Choose Functionality");
@@ -21,10 +27,22 @@ public class CityScientistOptionsPanel extends JPanel {
 		JButton addNewDataPointButton = new JButton("Add New Data Point");
 		addNewDataPointButton.setBounds(114, 94, 217, 29);
 		add(addNewDataPointButton);
+		
+		addNewDataPointButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				app.showAddDataPointPanel();
+		  	}
+		});
 
 		JButton addNewLocationButton = new JButton("Add New Location");
 		addNewLocationButton.setBounds(167, 148, 117, 29);
 		add(addNewLocationButton);
+		
+		addNewLocationButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				app.showAddLocationPanel();
+		  	}
+		});
 
 		JButton btnLogOut = new JButton("Log Out");
 		btnLogOut.setBounds(289, 239, 117, 29);

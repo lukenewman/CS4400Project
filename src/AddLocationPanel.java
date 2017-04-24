@@ -3,6 +3,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.Color;
@@ -10,15 +12,15 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
-public class AddNewLocation extends JPanel {
+public class AddLocationPanel extends JPanel {
 	private JTextField textField;
 	private JTextField textField_1;
+	
+	Application app;
 
-	/**
-	 * Create the panel.
-	 * @throws SQLException 
-	 */
-	public AddNewLocation() throws SQLException {
+	public AddLocationPanel(Application app) throws SQLException {
+		this.app = app;
+		
 		setLayout(null);
 		
 		JLabel lblAddANew = new JLabel("Add a new location");
@@ -88,10 +90,22 @@ public class AddNewLocation extends JPanel {
 		btnBack.setBounds(38, 251, 117, 29);
 		add(btnBack);
 		
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				app.showCityScientistOptions();
+		  	}
+		});
+		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.setEnabled(false);
 		btnSubmit.setBounds(286, 251, 117, 29);
 		add(btnSubmit);
+		
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO - Submit the information
+			}
+		});
 
 	}
 

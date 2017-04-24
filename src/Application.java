@@ -11,6 +11,7 @@ public class Application {
     final static String CITY_SCIENTIST_OPTIONS_PANEL = "City Scientist Options";
     final static String CITY_OFFICIAL_OPTIONS_PANEL = "City Official Options";
     final static String ADD_DATA_POINT_PANEL = "Add Data Point";
+    final static String ADD_LOCATION_PANEL = "Add Location";
 	
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -43,15 +44,20 @@ public class Application {
 	public void addComponentToPane(Container pane) throws SQLException {
         JPanel loginPanel = new LoginPanel(this);
         JPanel registrationPanel = new RegistrationPanel(this);
-        JPanel cityScientistOptionsPanel = new CityScientistOptionsPanel();
+        
+        JPanel cityScientistOptionsPanel = new CityScientistOptionsPanel(this);
+        JPanel addDataPointPanel = new AddDataPointPanel(this);
+        JPanel addLocationPanel = new AddLocationPanel(this);
+        
         JPanel cityOfficialOptionsPanel = new CityOfficialOptionsPanel();
-        JPanel addDataPointPanel = new AddDataPointPanel();
         
         cards = new JPanel(new CardLayout());
         cards.add(loginPanel, LOGIN_PANEL);
         cards.add(registrationPanel, REGISTRATION_PANEL);
+        
         cards.add(cityScientistOptionsPanel, CITY_SCIENTIST_OPTIONS_PANEL);
         cards.add(addDataPointPanel, ADD_DATA_POINT_PANEL);
+        cards.add(addLocationPanel, ADD_LOCATION_PANEL);
         
         cards.add(cityOfficialOptionsPanel, CITY_OFFICIAL_OPTIONS_PANEL);
          
@@ -76,5 +82,10 @@ public class Application {
 	public void showAddDataPointPanel() {
 		CardLayout cl = (CardLayout)(cards.getLayout());
         cl.show(cards, ADD_DATA_POINT_PANEL);
+	}
+	
+	public void showAddLocationPanel() {
+		CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, ADD_LOCATION_PANEL);
 	}
 }
