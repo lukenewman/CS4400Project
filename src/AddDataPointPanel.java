@@ -45,7 +45,7 @@ public class AddDataPointPanel extends JPanel {
 		for (int i = 0; i < rowCount; i++) {
 			options[i] = tmp.getItem(i);
 		}
-		JComboBox comboBox = new JComboBox();
+		JComboBox comboBox = new JComboBox(options);
 		comboBox.setBounds(196, 67, 103, 27);
 		add(comboBox);
 		
