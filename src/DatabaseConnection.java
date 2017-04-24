@@ -52,7 +52,7 @@ public class DatabaseConnection {
 			return null;
 		}
 	}
-	
+
 	public boolean executeInsert(String sqlStatement) {
 		Statement stmt = null;
 
@@ -94,7 +94,6 @@ public class DatabaseConnection {
 
 		try {
 			while (rs.next()) {
-				System.out.println("user type: " + rs.getString("User_Type"));
 				return rs.getString("User_Type");
 			}
 			return "ERROR";
@@ -117,7 +116,6 @@ public class DatabaseConnection {
 			e.printStackTrace();
 		}
 
-		System.out.println("user types: " + userTypes);
 		return userTypes;
 	}
 
@@ -126,15 +124,17 @@ public class DatabaseConnection {
 				+ newUser.getEmailAddress() + "', '" + newUser.getPassword() + "', '" + newUser.getUserType() + "')");
 	}
 
-	public void fig_3(String Name, String DateRecorded, String DataValue, String DataType, String Accepted) {
-		this.executeQuery("SELECT Name FROM POI");
-		this.executeQuery("SELECT * FROM DataType");
-		this.executeQuery("INSERT INTO DataPoint VALUES(" + Name +"," + DateRecorded+"," +DataValue+"," + DataType+"," + Accepted +")");
+	public boolean addNewDataPoint(String name, String dateRecorded, String dataValue, String dataType) {
+		// this.executeQuery("SELECT Name FROM POI"); // to populate drop-downs
+		// this.executeQuery("SELECT * FROM DataType");
+		return this.executeInsert("INSERT INTO DataPoint ('Name', 'Date_Recorded', 'Data_Value', 'Data_Type') VALUES("
+				+ name + "," + dateRecorded + "," + dataValue + "," + dataType + ")");
 	}
 
 	public void fig_4(String name, String Flag, String DateFlagged, String Zipcode, String City, String State) {
 		this.executeQuery("SELECT * FROM City_State");
-		this.executeQuery("INSERT INTO POI VALUES( " + name + "," + Flag +"," + DateFlagged +"," + Zipcode +"," + City +"," + State +")");
+		this.executeQuery("INSERT INTO POI VALUES( " + name + "," + Flag + "," + DateFlagged + "," + Zipcode + ","
+				+ City + "," + State + ")");
 	}
 
 	public void fig_6(String accepted, String name) {
@@ -142,7 +142,6 @@ public class DatabaseConnection {
 		this.executeQuery("UPDATE DataPoint SET Accepted =" + accepted + " WHERE Name = " + name);
 	}
 
-	
 	public void fig_7(String accepted, String uname) {
 		String first = "UPDATE City_Official SET Accepted = " + accepted + " WHERE Username = " + uname;
 		this.executeQuery("SELECT * FROM City_Official WHERE Accepted IS NULL");
