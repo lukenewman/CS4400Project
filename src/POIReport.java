@@ -16,16 +16,25 @@ import java.util.Vector;
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
 public class POIReport extends JPanel {
 	private JTable table;
 
+<<<<<<< HEAD
+	
+	/**
+	 * Create the panel.
+	 */
+	public POIReport() {
+=======
 	Application app;
 	
 	public POIReport(Application app) {
 		this.app = app;
 		
+>>>>>>> origin/master
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("POI Report");
@@ -35,15 +44,53 @@ public class POIReport extends JPanel {
 		lblNewLabel.setBounds(6, 6, 625, 48);
 		add(lblNewLabel);
 		
-		table = new JTable();
-		table.setBounds(6, 66, 625, 270);
-		add(table);
+//		table = new JTable();
+//		DefaultTableModel dtm = new DefaultTableModel(0, 0);
+//		table.setBackground(Color.GRAY);
+//		table.setBounds(6, 105, 704, 160);
+//		String header[] = new String[] {"POI location", "City", "State", "Mold Min", "Mold Avg", "Mold Max", "AQ Min", "AQ Avg", "AQ Max", "# of data points", "Flagged?"};
+//		dtm.setColumnIdentifiers(header);
+//		table.setModel(dtm);
+//		add(table);
+//	
+        table = new javax.swing.JTable();
+
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "POI location", "City", "State", "Mold Min", "Mold Avg", "Mold Max", "AQ Min", "AQ Avg", "AQ Max", "# of data points", "Flagged?"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        
+		
+
 		
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.setBounds(259, 370, 117, 29);
 		add(btnBack);
 		
+<<<<<<< HEAD
+=======
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				app.showCityOfficialOptions();
@@ -77,9 +124,17 @@ public class POIReport extends JPanel {
 	        }
 	        data.add(vector);
 	    }
+>>>>>>> origin/master
 
-	    return new DefaultTableModel(data, columnNames);
 
 	}
+	public static void main(String[] args) {
+		JFrame jf = new JFrame();
+		POIReport p = new POIReport();
+		jf.setVisible(true);
+		jf.add(p);
+		
+	}
+	
 
 }
