@@ -8,13 +8,10 @@ import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 
-public class AddDataPoint extends JPanel {
+public class AddDataPointPanel extends JPanel {
 	private JTextField textField;
 
-	/**
-	 * Create the panel.
-	 */
-	public AddDataPoint() {
+	public AddDataPointPanel() {
 		setLayout(null);
 		
 		JLabel lblAddANew = new JLabel("Add a new data point");

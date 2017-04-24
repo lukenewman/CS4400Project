@@ -78,7 +78,7 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 		JLabel lblNewLabel_2 = new JLabel("Fill out this form if you choose city official:");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setFont(new Font("Lato", Font.PLAIN, 13));
-		lblNewLabel_2.setBounds(144, 217, 270, 16);
+		lblNewLabel_2.setBounds(6, 217, 538, 16);
 		add(lblNewLabel_2);
 
 		ArrayList<String[]> result = new ArrayList<String[]>();
