@@ -2,6 +2,8 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.Color;
@@ -17,11 +19,10 @@ public class POIView extends JPanel {
 	private JTextField textField;
 	private JTable table;
 
-	/**
-	 * Create the panel.
-	 * @throws SQLException 
-	 */
-	public POIView() throws SQLException {
+	Application app;
+	
+	public POIView(Application app) throws SQLException {
+		this.app = app;
 		setLayout(null);
 		
 		JLabel lblViewpois = new JLabel("View POIs");
@@ -172,5 +173,11 @@ public class POIView extends JPanel {
 		btnBack.setBounds(213, 380, 117, 29);
 		add(btnBack);
 
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				app.showCityOfficialOptions();
+		  	}
+		});
+		
 	}
 }

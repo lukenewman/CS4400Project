@@ -13,14 +13,19 @@ public class Application {
     final static String CITY_OFFICIAL_OPTIONS_PANEL = "City Official Options";
     final static String ADD_DATA_POINT_PANEL = "Add Data Point";
     final static String ADD_LOCATION_PANEL = "Add Location";
+    final static String FILTER_SEARCH_POI_PANEL = "Filter Search POI";
+    final static String POI_REPORT_PANEL = "POI Report";
 	
     LoginPanel loginPanel;
     RegistrationPanel registrationPanel;
+    
     CityScientistOptionsPanel cityScientistOptionsPanel;
     AddDataPointPanel addDataPointPanel;
     AddLocationPanel addLocationPanel;
     
-    JPanel cityOfficialOptionsPanel = new CityOfficialOptionsPanel();
+    CityOfficialOptionsPanel cityOfficialOptionsPanel;
+    POIView poiFilterSearchPanel;
+    POIReport poiReportPanel;
     
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -58,7 +63,9 @@ public class Application {
         addDataPointPanel = new AddDataPointPanel(this);
         addLocationPanel = new AddLocationPanel(this);
         
-        cityOfficialOptionsPanel = new CityOfficialOptionsPanel();
+        cityOfficialOptionsPanel = new CityOfficialOptionsPanel(this);
+        poiFilterSearchPanel = new POIView(this);
+        poiReportPanel = new POIReport(this);
         
         cards = new JPanel(new CardLayout());
         cards.add(loginPanel, LOGIN_PANEL);
@@ -69,6 +76,8 @@ public class Application {
         cards.add(addLocationPanel, ADD_LOCATION_PANEL);
         
         cards.add(cityOfficialOptionsPanel, CITY_OFFICIAL_OPTIONS_PANEL);
+        cards.add(poiFilterSearchPanel, FILTER_SEARCH_POI_PANEL);
+        cards.add(poiReportPanel, POI_REPORT_PANEL);
          
         pane.add(cards, null);
     }
@@ -102,5 +111,15 @@ public class Application {
 	public void showAddLocationPanel() {
 		CardLayout cl = (CardLayout)(cards.getLayout());
         cl.show(cards, ADD_LOCATION_PANEL);
+	}
+	
+	public void showFilterSearchPOI() {
+		CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, FILTER_SEARCH_POI_PANEL);
+	}
+	
+	public void showPOIReport() {
+		CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, POI_REPORT_PANEL);
 	}
 }

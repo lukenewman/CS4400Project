@@ -8,6 +8,8 @@ import javax.swing.table.DefaultTableModel;
 import com.mysql.jdbc.ResultSetMetaData;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -18,10 +20,11 @@ import javax.swing.JButton;
 public class POIReport extends JPanel {
 	private JTable table;
 
-	/**
-	 * Create the panel.
-	 */
-	public POIReport() {
+	Application app;
+	
+	public POIReport(Application app) {
+		this.app = app;
+		
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("POI Report");
@@ -39,6 +42,12 @@ public class POIReport extends JPanel {
 		JButton btnBack = new JButton("Back");
 		btnBack.setBounds(259, 370, 117, 29);
 		add(btnBack);
+		
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				app.showCityOfficialOptions();
+		  	}
+		});
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(6, 66, 625, 270);

@@ -35,7 +35,7 @@ public class CityScientistOptionsPanel extends JPanel {
 		});
 
 		JButton addNewLocationButton = new JButton("Add New Location");
-		addNewLocationButton.setBounds(167, 148, 117, 29);
+		addNewLocationButton.setBounds(114, 148, 217, 29);
 		add(addNewLocationButton);
 		
 		addNewLocationButton.addActionListener(new ActionListener() {

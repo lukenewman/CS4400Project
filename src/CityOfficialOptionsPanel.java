@@ -2,12 +2,17 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 import javax.swing.JButton;
 
 public class CityOfficialOptionsPanel extends JPanel {
+	Application app;
 	
-	public CityOfficialOptionsPanel() {
+	public CityOfficialOptionsPanel(Application app) {
+		this.app = app;
+		
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Choose Functionality");
@@ -21,12 +26,30 @@ public class CityOfficialOptionsPanel extends JPanel {
 		btnFiltersearchPoi.setBounds(114, 94, 217, 29);
 		add(btnFiltersearchPoi);
 		
+		btnFiltersearchPoi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				app.showFilterSearchPOI();
+		  	}
+		});
+		
 		JButton btnPoiReport = new JButton("POI Report");
 		btnPoiReport.setBounds(167, 148, 117, 29);
 		add(btnPoiReport);
 		
+		btnPoiReport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				app.showPOIReport();
+		  	}
+		});
+		
 		JButton btnLogOut = new JButton("Log Out");
 		btnLogOut.setBounds(289, 239, 117, 29);
 		add(btnLogOut);
+		
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				app.showLogin();
+		  	}
+		});
 	}
 }
