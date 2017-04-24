@@ -78,7 +78,7 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 		}
 		String[] options3 = new String[rowCount3];
 		for (int i = 0; i < rowCount3; i++) {
-			options3[i] = tmp3.getItem(i).replace('_', ' ');
+			options3[i] = tmp3.getItem(i);
 		}
 		userTypeComboBox = new JComboBox<String>(options3);
 		userTypeComboBox.setFont(new Font("Lato", Font.PLAIN, 13));
@@ -225,7 +225,7 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 				app.showCityOfficialOptions();
 			}
 		} else {
-			
+			JOptionPane.showMessageDialog(this, "There was an error registering this user. Please try again.", "Registration Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
