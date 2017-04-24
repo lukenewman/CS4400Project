@@ -2,6 +2,9 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.List;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.Color;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -16,8 +19,9 @@ public class POIDetail extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @throws SQLException 
 	 */
-	public POIDetail() {
+	public POIDetail() throws SQLException {
 		setLayout(null);
 		
 		JLabel lblPoiDetail = new JLabel("POI Detail");
@@ -31,7 +35,18 @@ public class POIDetail extends JPanel {
 		lblType.setBounds(16, 44, 148, 16);
 		add(lblType);
 		
-		JComboBox comboBox = new JComboBox();
+		ResultSet rs = DatabaseConnection.sharedConnection().executeQuery("SELECT * FROM Data_Type");
+		int rowCount = 0;
+		List tmp = new List();
+		while(rs.next()){
+			tmp.add(rs.getString(1));
+			rowCount++;
+		}
+		String[] options = new String[rowCount];
+		for (int i = 0; i < rowCount; i++) {
+			options[i] = tmp.getItem(i);
+		}
+		JComboBox comboBox = new JComboBox(options);
 		comboBox.setBounds(176, 40, 52, 27);
 		add(comboBox);
 		

@@ -47,7 +47,7 @@ public class POIView extends JPanel {
 		for (int i = 0; i < rowCount; i++) {
 			options[i + 1] = tmp.getItem(i);
 		}
-		JComboBox comboBox = new JComboBox();
+		JComboBox comboBox = new JComboBox(options);
 		comboBox.setBounds(175, 46, 104, 27);
 		add(comboBox);
 		
