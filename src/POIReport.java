@@ -17,6 +17,7 @@ import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class POIReport extends JPanel {
 	private JTable table;
 

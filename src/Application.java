@@ -9,12 +9,18 @@ public class Application {
 	
     final static String LOGIN_PANEL = "Login Panel";
     final static String REGISTRATION_PANEL = "Registration Panel";
+    
     final static String CITY_SCIENTIST_OPTIONS_PANEL = "City Scientist Options";
-    final static String CITY_OFFICIAL_OPTIONS_PANEL = "City Official Options";
     final static String ADD_DATA_POINT_PANEL = "Add Data Point";
     final static String ADD_LOCATION_PANEL = "Add Location";
+    
+    final static String CITY_OFFICIAL_OPTIONS_PANEL = "City Official Options";
     final static String FILTER_SEARCH_POI_PANEL = "Filter Search POI";
     final static String POI_REPORT_PANEL = "POI Report";
+    
+    final static String ADMIN_OPTIONS_PANEL = "Admin Options";
+    final static String PENDING_DATA_POINTS_PANEL = "Pending Data Points";
+    final static String PENDING_CITY_OFFICIAL_ACCOUNTS_PANEL = "Pending City Official Accounts";
 	
     LoginPanel loginPanel;
     RegistrationPanel registrationPanel;
@@ -26,6 +32,10 @@ public class Application {
     CityOfficialOptionsPanel cityOfficialOptionsPanel;
     POIView poiFilterSearchPanel;
     POIReport poiReportPanel;
+    
+    AdminOptionsPanel adminOptionsPanel;
+    PendingDataPoints pendingDataPointsPanel;
+    PendingCityOfficials pendingCityOfficialsPanel;
     
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -67,6 +77,10 @@ public class Application {
         poiFilterSearchPanel = new POIView(this);
         poiReportPanel = new POIReport(this);
         
+        adminOptionsPanel = new AdminOptionsPanel(this);
+        pendingDataPointsPanel = new PendingDataPoints(this);
+        pendingCityOfficialsPanel = new PendingCityOfficials(this);
+        
         cards = new JPanel(new CardLayout());
         cards.add(loginPanel, LOGIN_PANEL);
         cards.add(registrationPanel, REGISTRATION_PANEL);
@@ -78,6 +92,10 @@ public class Application {
         cards.add(cityOfficialOptionsPanel, CITY_OFFICIAL_OPTIONS_PANEL);
         cards.add(poiFilterSearchPanel, FILTER_SEARCH_POI_PANEL);
         cards.add(poiReportPanel, POI_REPORT_PANEL);
+        
+        cards.add(adminOptionsPanel, ADMIN_OPTIONS_PANEL);
+        cards.add(pendingDataPointsPanel, PENDING_DATA_POINTS_PANEL);
+        cards.add(pendingCityOfficialsPanel, PENDING_CITY_OFFICIAL_ACCOUNTS_PANEL);
          
         pane.add(cards, null);
     }
@@ -121,5 +139,20 @@ public class Application {
 	public void showPOIReport() {
 		CardLayout cl = (CardLayout)(cards.getLayout());
         cl.show(cards, POI_REPORT_PANEL);
+	}
+	
+	public void showAdminOptionsPanel() {
+		CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, ADMIN_OPTIONS_PANEL);
+	}
+	
+	public void showPendingDataPoints() {
+		CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, PENDING_DATA_POINTS_PANEL);
+	}
+	
+	public void showPendingCityOfficialAccounts() {
+		CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, PENDING_CITY_OFFICIAL_ACCOUNTS_PANEL);
 	}
 }

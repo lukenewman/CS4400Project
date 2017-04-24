@@ -9,42 +9,41 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
-public class CityScientistOptionsPanel extends JPanel {
-
-	Application app;
+public class AdminOptionsPanel extends JPanel {
+Application app;
 	
-	public CityScientistOptionsPanel(Application app) {
+	public AdminOptionsPanel(Application app) {
 		this.app = app;
 		
 		setLayout(null);
-
+		
 		JLabel lblNewLabel = new JLabel("Choose Functionality");
 		lblNewLabel.setForeground(Color.ORANGE);
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 28));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(6, 6, 438, 63);
 		add(lblNewLabel);
-
-		JButton addNewDataPointButton = new JButton("Add New Data Point");
-		addNewDataPointButton.setBounds(114, 94, 217, 29);
-		add(addNewDataPointButton);
 		
-		addNewDataPointButton.addActionListener(new ActionListener() {
+		JButton pendingDataPointsButton = new JButton("Pending Data Points");
+		pendingDataPointsButton.setBounds(81, 94, 281, 29);
+		add(pendingDataPointsButton);
+		
+		pendingDataPointsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				app.showAddDataPointPanel();
+				app.showPendingDataPoints();
 		  	}
 		});
-
-		JButton addNewLocationButton = new JButton("Add New Location");
-		addNewLocationButton.setBounds(114, 148, 217, 29);
-		add(addNewLocationButton);
 		
-		addNewLocationButton.addActionListener(new ActionListener() {
+		JButton pendingCityOfficialAccountsButton = new JButton("Pending City Official Accounts");
+		pendingCityOfficialAccountsButton.setBounds(81, 148, 281, 29);
+		add(pendingCityOfficialAccountsButton);
+		
+		pendingCityOfficialAccountsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				app.showAddLocationPanel();
+				app.showPendingCityOfficialAccounts();
 		  	}
 		});
-
+		
 		JButton btnLogOut = new JButton("Log Out");
 		btnLogOut.setBounds(289, 239, 117, 29);
 		add(btnLogOut);
@@ -55,5 +54,4 @@ public class CityScientistOptionsPanel extends JPanel {
 		  	}
 		});
 	}
-
 }

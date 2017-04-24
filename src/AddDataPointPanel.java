@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class AddDataPointPanel extends JPanel {
 	private JTextField textField;
 	Application app;

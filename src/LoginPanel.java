@@ -68,7 +68,7 @@ public class LoginPanel extends JPanel {
 				} else if (userType.equals("City_Official")) {
 					app.showCityOfficialOptions();
 				} else if (userType.equals("Admin")) {
-					// TODO
+					app.showAdminOptionsPanel();
 				}
 			}
 		});

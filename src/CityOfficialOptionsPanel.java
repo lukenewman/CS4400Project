@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.Color;
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class CityOfficialOptionsPanel extends JPanel {
 	Application app;
 	

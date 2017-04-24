@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class AddLocationPanel extends JPanel {
 	private JTextField textField;
 	private JTextField textField_1;

@@ -15,6 +15,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
+@SuppressWarnings("serial")
 public class POIView extends JPanel {
 	private JTextField textField;
 	private JTable table;
