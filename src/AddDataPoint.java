@@ -2,6 +2,9 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.List;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.Color;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -13,8 +16,9 @@ public class AddDataPoint extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @throws SQLException 
 	 */
-	public AddDataPoint() {
+	public AddDataPoint() throws SQLException {
 		setLayout(null);
 		
 		JLabel lblAddANew = new JLabel("Add a new data point");
@@ -29,6 +33,17 @@ public class AddDataPoint extends JPanel {
 		lblPoiLocationName.setBounds(77, 71, 107, 16);
 		add(lblPoiLocationName);
 		
+		ResultSet rs = DatabaseConnection.sharedConnection().executeQuery("SELECT DISTINCT Name FROM POI");
+		int rowCount = 0;
+		List tmp = new List();
+		while(rs.next()){
+			tmp.add(rs.getString(1));
+			rowCount++;
+		}
+		String[] options = new String[rowCount];
+		for (int i = 0; i < rowCount; i++) {
+			options[i] = tmp.getItem(i);
+		}
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(196, 67, 103, 27);
 		add(comboBox);
@@ -79,7 +94,18 @@ public class AddDataPoint extends JPanel {
 		lblDataType.setBounds(123, 213, 61, 16);
 		add(lblDataType);
 		
-		JComboBox comboBox_4 = new JComboBox();
+		ResultSet rs2 = DatabaseConnection.sharedConnection().executeQuery("SELECT DISTINCT City FROM City_State");
+		int rowCount2 = 0;
+		List tmp2 = new List();
+		while(rs2.next()){
+			tmp2.add(rs2.getString(1));
+			rowCount2++;
+		}
+		String[] options2 = new String[rowCount];
+		for (int i = 0; i < rowCount2; i++) {
+			options2[i] = tmp2.getItem(i);
+		}
+		JComboBox comboBox_4 = new JComboBox(options2);
 		comboBox_4.setBounds(197, 209, 75, 27);
 		add(comboBox_4);
 		
