@@ -2,6 +2,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import java.util.*;
+import java.sql.*;
 
 @SuppressWarnings("serial")
 public class RegistrationPanel extends JPanel implements ActionListener {
@@ -16,7 +18,7 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 	private JComboBox<String> cityComboBox;
 	private JComboBox<String> stateComboBox;
 
-	public RegistrationPanel() {
+	public RegistrationPanel() throws SQLException {
 		setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("New User Registration");
@@ -75,6 +77,16 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 		lblNewLabel_2.setBounds(144, 217, 270, 16);
 		add(lblNewLabel_2);
 
+		ArrayList<String[]> result = new ArrayList<String[]>();
+		ResultSet rs = DatabaseConnection.sharedConnection().executeQuery("SELECT * FROM User");
+		int columnCount = rs.getMetaData().getColumnCount();
+		while(rs.next()){
+			String[] row = new String[columnCount];
+			for (int i=0; i < columnCount; i++) {
+				row[i] = rs.getString(i + 1);
+			}
+			result.add(row);
+		}
 		cityComboBox = new JComboBox<String>();
 		cityComboBox.setFont(new Font("Lato", Font.PLAIN, 13));
 		cityComboBox.setBounds(272, 245, 159, 27);
