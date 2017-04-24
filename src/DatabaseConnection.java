@@ -122,22 +122,23 @@ public class DatabaseConnection {
 				+ newUser.getEmailAddress() + "', '" + newUser.getPassword() + "', '" + newUser.getUserType() + "')");
 	}
 
-	public void fig_3() {
+	public void fig_3(String Name, String DateRecorded, String DataValue, String DataType, String Accepted) {
 		this.executeQuery("SELECT Name FROM POI");
 		this.executeQuery("SELECT * FROM DataType");
-		this.executeQuery("INSERT INTO DataPoint VALUES(Name, DateRecorded, DataValue, DataType, Accepted)");
+		this.executeQuery("INSERT INTO DataPoint VALUES(" + Name +"," + DateRecorded+"," +DataValue+"," + DataType+"," + Accepted +")");
 	}
 
-	public void fig_4() {
+	public void fig_4(String name, String Flag, String DateFlagged, String Zipcode, String City, String State) {
 		this.executeQuery("SELECT * FROM City_State");
-		this.executeQuery("INSERT INTO POI VALUES(Name, Flag, DateFlagged, ZipCode, City, State)");
+		this.executeQuery("INSERT INTO POI VALUES( " + name + "," + Flag +"," + DateFlagged +"," + Zipcode +"," + City +"," + State +")");
 	}
 
-	public void fig_6() {
+	public void fig_6(String accepted, String name) {
 		this.executeQuery("SELECT * FROM DataPoint WHERE Accepted IS NULL");
-		this.executeQuery("UPDATE DataPoint SET Accepted = ? WHERE Name = ?");
+		this.executeQuery("UPDATE DataPoint SET Accepted =" + accepted + " WHERE Name = " + name);
 	}
 
+	
 	public void fig_7(String accepted, String uname) {
 		String first = "UPDATE City_Official SET Accepted = " + accepted + " WHERE Username = " + uname;
 		this.executeQuery("SELECT * FROM City_Official WHERE Accepted IS NULL");
