@@ -45,7 +45,7 @@ public class POIView extends JPanel {
 		String[] options = new String[rowCount + 1];
 		options[0] = "Not Selected";
 		for (int i = 0; i < rowCount; i++) {
-			options[i] = tmp.getItem(i + 1);
+			options[i + 1] = tmp.getItem(i);
 		}
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(175, 46, 104, 27);
@@ -65,7 +65,7 @@ public class POIView extends JPanel {
 		String[] options2 = new String[rowCount2 + 1];
 		options2[0] = "Not Selected";
 		for (int i = 0; i < rowCount2; i++) {
-			options2[i] = tmp2.getItem(i + 1);
+			options2[i + 1] = tmp2.getItem(i);
 		}
 		JComboBox comboBox_1 = new JComboBox(options2);
 		comboBox_1.setBounds(175, 75, 104, 27);
@@ -85,7 +85,7 @@ public class POIView extends JPanel {
 		String[] options3 = new String[rowCount3 + 1];
 		options3[0] = "Not Selected";
 		for (int i = 0; i < rowCount3; i++) {
-			options3[i] = tmp3.getItem(i + 1);
+			options3[i + 1] = tmp3.getItem(i);
 		}
 		JComboBox comboBox_2 = new JComboBox(options3);
 		comboBox_2.setBounds(175, 109, 104, 27);
