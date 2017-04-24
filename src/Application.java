@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.sql.SQLException;
+
 import javax.swing.*;
 
 public class Application {
@@ -21,12 +23,17 @@ public class Application {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Application app = new Application();
-        app.addComponentToPane(frame.getContentPane());
+        try {
+			app.addComponentToPane(frame.getContentPane());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         frame.setVisible(true);
 	}
 	
-	public void addComponentToPane(Container pane) {
+	public void addComponentToPane(Container pane) throws SQLException {
         JPanel loginPanel = new LoginPanel(this);
         JPanel registrationPanel = new RegistrationPanel();
         

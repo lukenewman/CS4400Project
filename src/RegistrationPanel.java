@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -64,10 +65,20 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 		lblUserType.setBounds(116, 182, 62, 16);
 		add(lblUserType);
 
-		userTypeComboBox = new JComboBox<String>();
+		ResultSet rs3 = DatabaseConnection.sharedConnection().executeQuery("SELECT DISTINCT User_Type FROM User WHERE User_Type != 'Admin'");
+		int rowCount3 = 0;
+		List tmp3 = new List();
+		while(rs3.next()){
+			tmp3.add(rs3.getString(1));
+			rowCount3++;
+		}
+		String[] options3 = new String[rowCount3];
+		for (int i = 0; i < rowCount3; i++) {
+			options3[i] = tmp3.getItem(i).replace('_', ' ');
+		}
+		userTypeComboBox = new JComboBox<String>(options3);
 		userTypeComboBox.setFont(new Font("Lato", Font.PLAIN, 13));
 		userTypeComboBox.setBounds(272, 178, 159, 27);
-		userTypeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] { "City Scientist", "City Official" }));
 		userTypeComboBox.addActionListener(this);
 		add(userTypeComboBox);
 
@@ -77,22 +88,45 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 		lblNewLabel_2.setBounds(144, 217, 270, 16);
 		add(lblNewLabel_2);
 
-		ArrayList<String[]> result = new ArrayList<String[]>();
-		ResultSet rs = DatabaseConnection.sharedConnection().executeQuery("SELECT * FROM User");
-		int columnCount = rs.getMetaData().getColumnCount();
+//		ArrayList<String[]> result = new ArrayList<String[]>();
+//		ResultSet rs = DatabaseConnection.sharedConnection().executeQuery("SELECT City FROM City_State");
+//		int columnCount = rs.getMetaData().getColumnCount();
+//		while(rs.next()){
+//			String[] row = new String[columnCount];
+//			for (int i=0; i < columnCount; i++) {
+//				row[i] = rs.getString(i + 1);
+//			}
+//			result.add(row);
+//		}
+		
+		ResultSet rs = DatabaseConnection.sharedConnection().executeQuery("SELECT DISTINCT City FROM City_State");
+		int rowCount = 0;
+		List tmp = new List();
 		while(rs.next()){
-			String[] row = new String[columnCount];
-			for (int i=0; i < columnCount; i++) {
-				row[i] = rs.getString(i + 1);
-			}
-			result.add(row);
+			tmp.add(rs.getString(1));
+			rowCount++;
 		}
-		cityComboBox = new JComboBox<String>();
+		String[] options = new String[rowCount];
+		for (int i = 0; i < rowCount; i++) {
+			options[i] = tmp.getItem(i);
+		}
+		cityComboBox = new JComboBox<String>(options);
 		cityComboBox.setFont(new Font("Lato", Font.PLAIN, 13));
 		cityComboBox.setBounds(272, 245, 159, 27);
 		add(cityComboBox);
 
-		stateComboBox = new JComboBox<String>();
+		ResultSet rs2 = DatabaseConnection.sharedConnection().executeQuery("SELECT DISTINCT State FROM City_State");
+		int rowCount2 = 0;
+		List tmp2 = new List();
+		while(rs2.next()){
+			tmp2.add(rs2.getString(1));
+			rowCount2++;
+		}
+		String[] options2 = new String[rowCount2];
+		for (int i = 0; i < rowCount2; i++) {
+			options2[i] = tmp2.getItem(i);
+		}
+		stateComboBox = new JComboBox<String>(options2);
 		stateComboBox.setFont(new Font("Lato", Font.PLAIN, 13));
 		stateComboBox.setBounds(272, 271, 159, 27);
 		add(stateComboBox);
