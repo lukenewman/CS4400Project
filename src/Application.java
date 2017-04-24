@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.sql.SQLException;
+
 import javax.swing.*;
 
 public class Application {
@@ -10,12 +12,17 @@ public class Application {
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				createAndShowGUI();
+				try {
+					createAndShowGUI();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 	}
 	
-	private static void createAndShowGUI() {
+	private static void createAndShowGUI() throws SQLException {
         JFrame frame = new JFrame();
         frame.setBounds(200, 200, 550, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,7 +33,7 @@ public class Application {
         frame.setVisible(true);
 	}
 	
-	public void addComponentToPane(Container pane) {
+	public void addComponentToPane(Container pane) throws SQLException {
         JPanel loginPanel = new LoginPanel(this);
         JPanel registrationPanel = new RegistrationPanel();
         

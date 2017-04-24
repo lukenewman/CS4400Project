@@ -79,7 +79,10 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 
 		ArrayList<String[]> result = new ArrayList<String[]>();
 		ResultSet rs = DatabaseConnection.sharedConnection().executeQuery("SELECT * FROM User");
+		System.out.println("We got here");
 		int columnCount = rs.getMetaData().getColumnCount();
+		System.out.println(rs.getRow());
+		System.out.println(columnCount);
 		while(rs.next()){
 			String[] row = new String[columnCount];
 			for (int i=0; i < columnCount; i++) {
