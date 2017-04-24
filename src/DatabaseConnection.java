@@ -84,32 +84,33 @@ public class DatabaseConnection {
 		}
 	}
 	
-	public String[] getUserTypes() {
-		ResultSet rs = this.executeQuery("SELECT DISTINCT User_Type FROM User WHERE User_Type != ‘Admin’");
-	}
+//	public String[] getUserTypes() {
+//		ResultSet rs = this.executeQuery("SELECT DISTINCT User_Type FROM User WHERE User_Type != ‘Admin’");
+//	}
 
-	public void fig_2() {
+	public void fig_2(String Username, String Title, String Approved, String City, String State) {
 		this.executeQuery("SELECT * from City_State");
 		this.executeQuery("INSERT INTO User VALUES(Username, Email_Address, Password, UserType)");
-		this.executeQuery("INSERT INTO City_Official VALUES(Username, Title, Approved, City, State);");
+		this.executeQuery("INSERT INTO City_Official VALUES(" + "," + Username+ "," +  Title+ "," +  Approved+ "," + City+ "," +  State + ")");
 	}
 
-	public void fig_3() {
+	public void fig_3(String Name, String DateRecorded, String DataValue, String DataType, String Accepted) {
 		this.executeQuery("SELECT Name FROM POI");
 		this.executeQuery("SELECT * FROM DataType");
-		this.executeQuery("INSERT INTO DataPoint VALUES(Name, DateRecorded, DataValue, DataType, Accepted)");
+		this.executeQuery("INSERT INTO DataPoint VALUES(" + Name +"," + DateRecorded+"," +DataValue+"," + DataType+"," + Accepted +")");
 	}
 
-	public void fig_4() {
+	public void fig_4(String name, String Flag, String DateFlagged, String Zipcode, String City, String State) {
 		this.executeQuery("SELECT * FROM City_State");
-		this.executeQuery("INSERT INTO POI VALUES(Name, Flag, DateFlagged, ZipCode, City, State)");
+		this.executeQuery("INSERT INTO POI VALUES( " + name + "," + Flag +"," + DateFlagged +"," + Zipcode +"," + City +"," + State +")");
 	}
 
-	public void fig_6() {
+	public void fig_6(String accepted, String name) {
 		this.executeQuery("SELECT * FROM DataPoint WHERE Accepted IS NULL");
-		this.executeQuery("UPDATE DataPoint SET Accepted = ? WHERE Name = ?");
+		this.executeQuery("UPDATE DataPoint SET Accepted =" + accepted + " WHERE Name = " + name);
 	}
 
+	
 	public void fig_7(String accepted, String uname) {
 		String first = "UPDATE City_Official SET Accepted = " + accepted + " WHERE Username = " + uname;
 		this.executeQuery("SELECT * FROM City_Official WHERE Accepted IS NULL");
