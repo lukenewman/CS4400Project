@@ -6,6 +6,7 @@ import javax.swing.*;
 public class Application {
 
 	JPanel cards;
+	
     final static String LOGIN_PANEL = "Login Panel";
     final static String REGISTRATION_PANEL = "Registration Panel";
     final static String CITY_SCIENTIST_OPTIONS_PANEL = "City Scientist Options";
@@ -13,6 +14,14 @@ public class Application {
     final static String ADD_DATA_POINT_PANEL = "Add Data Point";
     final static String ADD_LOCATION_PANEL = "Add Location";
 	
+    LoginPanel loginPanel;
+    RegistrationPanel registrationPanel;
+    CityScientistOptionsPanel cityScientistOptionsPanel;
+    AddDataPointPanel addDataPointPanel;
+    AddLocationPanel addLocationPanel;
+    
+    JPanel cityOfficialOptionsPanel = new CityOfficialOptionsPanel();
+    
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -42,14 +51,14 @@ public class Application {
 	}
 	
 	public void addComponentToPane(Container pane) throws SQLException {
-        JPanel loginPanel = new LoginPanel(this);
-        JPanel registrationPanel = new RegistrationPanel(this);
+        loginPanel = new LoginPanel(this);
+        registrationPanel = new RegistrationPanel(this);
         
-        JPanel cityScientistOptionsPanel = new CityScientistOptionsPanel(this);
-        JPanel addDataPointPanel = new AddDataPointPanel(this);
-        JPanel addLocationPanel = new AddLocationPanel(this);
+        cityScientistOptionsPanel = new CityScientistOptionsPanel(this);
+        addDataPointPanel = new AddDataPointPanel(this);
+        addLocationPanel = new AddLocationPanel(this);
         
-        JPanel cityOfficialOptionsPanel = new CityOfficialOptionsPanel();
+        cityOfficialOptionsPanel = new CityOfficialOptionsPanel();
         
         cards = new JPanel(new CardLayout());
         cards.add(loginPanel, LOGIN_PANEL);
@@ -63,6 +72,12 @@ public class Application {
          
         pane.add(cards, null);
     }
+	
+	public void showLogin() {
+		loginPanel.clear();
+		CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, LOGIN_PANEL);
+	}
 	
 	public void showRegistrationFrame() {
 		CardLayout cl = (CardLayout)(cards.getLayout());

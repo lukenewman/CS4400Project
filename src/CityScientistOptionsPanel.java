@@ -47,6 +47,12 @@ public class CityScientistOptionsPanel extends JPanel {
 		JButton btnLogOut = new JButton("Log Out");
 		btnLogOut.setBounds(289, 239, 117, 29);
 		add(btnLogOut);
+		
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				app.showLogin();
+		  	}
+		});
 	}
 
 }
