@@ -9,8 +9,6 @@ import java.sql.*;
 @SuppressWarnings("serial")
 public class RegistrationPanel extends JPanel implements ActionListener {
 
-	Application app;
-	
 	private JTextField usernameTextField;
 	private JTextField emailAddressTextField;
 	private JTextField titleTextField;
@@ -21,9 +19,7 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 	private JComboBox<String> cityComboBox;
 	private JComboBox<String> stateComboBox;
 
-	public RegistrationPanel(Application app) throws SQLException {
-		this.app = app;
-		
+	public RegistrationPanel() throws SQLException {
 		setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("New User Registration");
@@ -78,20 +74,25 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 		}
 		String[] options3 = new String[rowCount3];
 		for (int i = 0; i < rowCount3; i++) {
-			options3[i] = tmp3.getItem(i);
+			options3[i] = tmp3.getItem(i).replace('_', ' ');
 		}
 		userTypeComboBox = new JComboBox<String>(options3);
 		userTypeComboBox.setFont(new Font("Lato", Font.PLAIN, 13));
 		userTypeComboBox.setBounds(272, 178, 159, 27);
+<<<<<<< HEAD
+=======
+		userTypeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] { "City_Scientist", "City_Official" }));
+>>>>>>> 456f35766b7e5a3010a234ac0d8e3304779e4c88
 		userTypeComboBox.addActionListener(this);
 		add(userTypeComboBox);
 
 		JLabel lblNewLabel_2 = new JLabel("Fill out this form if you choose city official:");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setFont(new Font("Lato", Font.PLAIN, 13));
-		lblNewLabel_2.setBounds(6, 217, 538, 16);
+		lblNewLabel_2.setBounds(144, 217, 270, 16);
 		add(lblNewLabel_2);
 
+<<<<<<< HEAD
 //		ArrayList<String[]> result = new ArrayList<String[]>();
 //		ResultSet rs = DatabaseConnection.sharedConnection().executeQuery("SELECT City FROM City_State");
 //		int columnCount = rs.getMetaData().getColumnCount();
@@ -106,6 +107,14 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 		ResultSet rs = DatabaseConnection.sharedConnection().executeQuery("SELECT DISTINCT City FROM City_State");
 		int rowCount = 0;
 		List tmp = new List();
+=======
+		ArrayList<String[]> result = new ArrayList<String[]>();
+		ResultSet rs = DatabaseConnection.sharedConnection().executeQuery("SELECT * FROM User");
+		System.out.println("We got here");
+		int columnCount = rs.getMetaData().getColumnCount();
+		System.out.println(rs.getRow());
+		System.out.println(columnCount);
+>>>>>>> 456f35766b7e5a3010a234ac0d8e3304779e4c88
 		while(rs.next()){
 			tmp.add(rs.getString(1));
 			rowCount++;
@@ -172,7 +181,7 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 		confirmPasswordField.setBounds(272, 149, 159, 26);
 		add(confirmPasswordField);
 		
-		updateUIForSelectedUserType("City_Scientist");
+		updateUIForSelectedUserType("City Scientist");
 	}
 
 	@Override
@@ -204,7 +213,7 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 
 		// For City Officials, check the remaining fields.
 		String selectedUserType = (String)userTypeComboBox.getSelectedItem();
-		if (selectedUserType.equals("City_Official")) {
+		if (selectedUserType.equals("City Official")) {
 			if (titleTextField.getText().equals("")) {
 				JOptionPane.showMessageDialog(this, "Please enter a title.", "Missing Field", JOptionPane.WARNING_MESSAGE);
 				return;
@@ -219,18 +228,14 @@ public class RegistrationPanel extends JPanel implements ActionListener {
 		newUser.setUserType((String)userTypeComboBox.getSelectedItem());
 		boolean success = DatabaseConnection.sharedConnection().registerUser(newUser);
 		if (success) {
-			if (newUser.getUserType().equals("City_Scientist")) {
-				app.showCityScientistOptions();
-			} else {
-				app.showCityOfficialOptions();
-			}
+			// go to new data point
 		} else {
-			JOptionPane.showMessageDialog(this, "There was an error registering this user. Please try again.", "Registration Error", JOptionPane.ERROR_MESSAGE);
+			
 		}
 	}
 	
 	private void updateUIForSelectedUserType(String userType) {
-		boolean enabled = userType.equals("City_Official");
+		boolean enabled = userType.equals("City Official");
 		cityComboBox.setEnabled(enabled);
 		stateComboBox.setEnabled(enabled);
 		titleTextField.setEnabled(enabled);

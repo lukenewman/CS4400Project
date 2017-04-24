@@ -1,6 +1,11 @@
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -10,14 +15,15 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
+@SuppressWarnings("serial")
 public class POIView extends JPanel {
 	private JTextField textField;
 	private JTable table;
 
-	/**
-	 * Create the panel.
-	 */
-	public POIView() {
+	Application app;
+	
+	public POIView(Application app) throws SQLException {
+		this.app = app;
 		setLayout(null);
 		
 		JLabel lblViewpois = new JLabel("View POIs");
@@ -31,7 +37,19 @@ public class POIView extends JPanel {
 		lblPoiLocationName.setBounds(16, 51, 133, 16);
 		add(lblPoiLocationName);
 		
-		JComboBox comboBox = new JComboBox();
+		ResultSet rs = DatabaseConnection.sharedConnection().executeQuery("SELECT Name FROM POI");
+		int rowCount = 0;
+		List tmp = new List();
+		while(rs.next()){
+			tmp.add(rs.getString(1));
+			rowCount++;
+		}
+		String[] options = new String[rowCount + 1];
+		options[0] = "Not Selected";
+		for (int i = 0; i < rowCount; i++) {
+			options[i + 1] = tmp.getItem(i);
+		}
+		JComboBox comboBox = new JComboBox(options);
 		comboBox.setBounds(175, 46, 104, 27);
 		add(comboBox);
 		
@@ -39,7 +57,19 @@ public class POIView extends JPanel {
 		lblCity.setBounds(16, 79, 133, 16);
 		add(lblCity);
 		
-		JComboBox comboBox_1 = new JComboBox();
+		ResultSet rs2 = DatabaseConnection.sharedConnection().executeQuery("SELECT DISTINCT City FROM City_State");
+		int rowCount2 = 0;
+		List tmp2 = new List();
+		while(rs2.next()){
+			tmp2.add(rs2.getString(1));
+			rowCount2++;
+		}
+		String[] options2 = new String[rowCount2 + 1];
+		options2[0] = "Not Selected";
+		for (int i = 0; i < rowCount2; i++) {
+			options2[i + 1] = tmp2.getItem(i);
+		}
+		JComboBox comboBox_1 = new JComboBox(options2);
 		comboBox_1.setBounds(175, 75, 104, 27);
 		add(comboBox_1);
 		
@@ -47,7 +77,19 @@ public class POIView extends JPanel {
 		lblNewLabel.setBounds(16, 113, 133, 16);
 		add(lblNewLabel);
 		
-		JComboBox comboBox_2 = new JComboBox();
+		ResultSet rs3 = DatabaseConnection.sharedConnection().executeQuery("SELECT DISTINCT State FROM City_State");
+		int rowCount3 = 0;
+		List tmp3 = new List();
+		while(rs3.next()){
+			tmp3.add(rs3.getString(1));
+			rowCount3++;
+		}
+		String[] options3 = new String[rowCount3 + 1];
+		options3[0] = "Not Selected";
+		for (int i = 0; i < rowCount3; i++) {
+			options3[i + 1] = tmp3.getItem(i);
+		}
+		JComboBox comboBox_2 = new JComboBox(options3);
 		comboBox_2.setBounds(175, 109, 104, 27);
 		add(comboBox_2);
 		
@@ -132,5 +174,11 @@ public class POIView extends JPanel {
 		btnBack.setBounds(213, 380, 117, 29);
 		add(btnBack);
 
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				app.showCityOfficialOptions();
+		  	}
+		});
+		
 	}
 }

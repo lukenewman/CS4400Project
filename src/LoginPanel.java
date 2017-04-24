@@ -62,10 +62,20 @@ public class LoginPanel extends JPanel {
 		
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean loggedIn = DatabaseConnection.sharedConnection().login(usernameTextField.getText(), new String(passwordField.getPassword()));
-				System.out.println(loggedIn);
-				// move to next screen
+				String userType = DatabaseConnection.sharedConnection().login(usernameTextField.getText(), new String(passwordField.getPassword()));
+				if (userType.equals("City_Scientist")) {
+					app.showCityScientistOptions();
+				} else if (userType.equals("City_Official")) {
+					app.showCityOfficialOptions();
+				} else if (userType.equals("Admin")) {
+					app.showAdminOptionsPanel();
+				}
 			}
 		});
+	}
+	
+	public void clear() {
+		usernameTextField.setText("");
+		passwordField.setText("");
 	}
 }

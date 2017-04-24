@@ -88,15 +88,19 @@ public class DatabaseConnection {
 		return users;
 	}
 
-	public boolean login(String username, String password) {
-		ResultSet rs = this.executeQuery("SELECT Username,Password FROM User WHERE Username = '" + username
+	public String login(String username, String password) {
+		ResultSet rs = this.executeQuery("SELECT Username,Password,User_type FROM User WHERE Username = '" + username
 				+ "' AND Password = '" + password + "'");
 
 		try {
-			return rs.next();
+			while (rs.next()) {
+				System.out.println("user type: " + rs.getString("User_Type"));
+				return rs.getString("User_Type");
+			}
+			return "ERROR";
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+			return "ERROR";
 		}
 	}
 

@@ -2,19 +2,26 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
-public class AddNewLocation extends JPanel {
+@SuppressWarnings("serial")
+public class AddLocationPanel extends JPanel {
 	private JTextField textField;
 	private JTextField textField_1;
+	
+	Application app;
 
-	/**
-	 * Create the panel.
-	 */
-	public AddNewLocation() {
+	public AddLocationPanel(Application app) throws SQLException {
+		this.app = app;
+		
 		setLayout(null);
 		
 		JLabel lblAddANew = new JLabel("Add a new location");
@@ -37,7 +44,18 @@ public class AddNewLocation extends JPanel {
 		lblCity.setBounds(105, 101, 30, 16);
 		add(lblCity);
 		
-		JComboBox comboBox = new JComboBox();
+		ResultSet rs = DatabaseConnection.sharedConnection().executeQuery("SELECT DISTINCT City FROM City_State");
+		int rowCount = 0;
+		List tmp = new List();
+		while(rs.next()){
+			tmp.add(rs.getString(1));
+			rowCount++;
+		}
+		String[] options = new String[rowCount];
+		for (int i = 0; i < rowCount; i++) {
+			options[i] = tmp.getItem(i);
+		}
+		JComboBox comboBox = new JComboBox(options);
 		comboBox.setBounds(147, 97, 119, 27);
 		add(comboBox);
 		
@@ -45,7 +63,18 @@ public class AddNewLocation extends JPanel {
 		lblState.setBounds(104, 142, 31, 16);
 		add(lblState);
 		
-		JComboBox comboBox_1 = new JComboBox();
+		ResultSet rs2 = DatabaseConnection.sharedConnection().executeQuery("SELECT DISTINCT State FROM City_State");
+		int rowCount2 = 0;
+		List tmp2 = new List();
+		while(rs2.next()){
+			tmp2.add(rs2.getString(1));
+			rowCount2++;
+		}
+		String[] options2 = new String[rowCount2];
+		for (int i = 0; i < rowCount2; i++) {
+			options2[i] = tmp2.getItem(i);
+		}
+		JComboBox comboBox_1 = new JComboBox(options2);
 		comboBox_1.setBounds(147, 138, 119, 27);
 		add(comboBox_1);
 		
@@ -62,10 +91,22 @@ public class AddNewLocation extends JPanel {
 		btnBack.setBounds(38, 251, 117, 29);
 		add(btnBack);
 		
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				app.showCityScientistOptions();
+		  	}
+		});
+		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.setEnabled(false);
 		btnSubmit.setBounds(286, 251, 117, 29);
 		add(btnSubmit);
+		
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO - Submit the information
+			}
+		});
 
 	}
 

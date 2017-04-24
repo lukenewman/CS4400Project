@@ -2,19 +2,25 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.Color;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 
-public class AddDataPoint extends JPanel {
+@SuppressWarnings("serial")
+public class AddDataPointPanel extends JPanel {
 	private JTextField textField;
+	Application app;
 
-	/**
-	 * Create the panel.
-	 */
-	public AddDataPoint() {
+	public AddDataPointPanel(Application app) throws SQLException {
+		this.app = app;
+		
 		setLayout(null);
 		
 		JLabel lblAddANew = new JLabel("Add a new data point");
@@ -29,7 +35,18 @@ public class AddDataPoint extends JPanel {
 		lblPoiLocationName.setBounds(77, 71, 107, 16);
 		add(lblPoiLocationName);
 		
-		JComboBox comboBox = new JComboBox();
+		ResultSet rs = DatabaseConnection.sharedConnection().executeQuery("SELECT DISTINCT Name FROM POI");
+		int rowCount = 0;
+		List tmp = new List();
+		while(rs.next()){
+			tmp.add(rs.getString(1));
+			rowCount++;
+		}
+		String[] options = new String[rowCount];
+		for (int i = 0; i < rowCount; i++) {
+			options[i] = tmp.getItem(i);
+		}
+		JComboBox comboBox = new JComboBox(options);
 		comboBox.setBounds(196, 67, 103, 27);
 		add(comboBox);
 		
@@ -79,7 +96,18 @@ public class AddDataPoint extends JPanel {
 		lblDataType.setBounds(123, 213, 61, 16);
 		add(lblDataType);
 		
-		JComboBox comboBox_4 = new JComboBox();
+		ResultSet rs2 = DatabaseConnection.sharedConnection().executeQuery("SELECT * FROM Data_Type");
+		int rowCount2 = 0;
+		List tmp2 = new List();
+		while(rs2.next()){
+			tmp2.add(rs2.getString(1));
+			rowCount2++;
+		}
+		String[] options2 = new String[rowCount2];
+		for (int i = 0; i < rowCount2; i++) {
+			options2[i] = tmp2.getItem(i);
+		}
+		JComboBox comboBox_4 = new JComboBox(options2);
 		comboBox_4.setBounds(197, 209, 75, 27);
 		add(comboBox_4);
 		
@@ -121,10 +149,22 @@ public class AddDataPoint extends JPanel {
 		btnBack.setBounds(46, 265, 117, 29);
 		add(btnBack);
 		
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				app.showCityScientistOptions();
+		  	}
+		});
+		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.setEnabled(false);
 		btnSubmit.setBounds(235, 265, 117, 29);
 		add(btnSubmit);
+		
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO - Submit the information
+			}
+		});
 
 	}
 }
