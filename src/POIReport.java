@@ -49,7 +49,7 @@ public class POIReport extends JPanel {
 	public static DefaultTableModel buildTableModel(ResultSet rs)
 	        throws SQLException {
 
-	    ResultSetMetaData metaData = rs.getMetaData();
+	    ResultSetMetaData metaData = (ResultSetMetaData) rs.getMetaData();
 
 	    // names of columns
 	    Vector<String> columnNames = new Vector<String>();
