@@ -101,7 +101,7 @@ public class AddDataPoint extends JPanel {
 			tmp2.add(rs2.getString(1));
 			rowCount2++;
 		}
-		String[] options2 = new String[rowCount];
+		String[] options2 = new String[rowCount2];
 		for (int i = 0; i < rowCount2; i++) {
 			options2[i] = tmp2.getItem(i);
 		}
