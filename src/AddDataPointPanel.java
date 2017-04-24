@@ -11,13 +11,9 @@ import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 
-public class AddDataPoint extends JPanel {
+public class AddDataPointPanel extends JPanel {
 	private JTextField textField;
 
-	/**
-	 * Create the panel.
-	 * @throws SQLException 
-	 */
 	public AddDataPoint() throws SQLException {
 		setLayout(null);
 		
